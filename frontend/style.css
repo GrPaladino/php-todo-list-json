@@ -1,0 +1,26 @@
+li {
+    padding: 1rem;
+    margin-top: 1rem;
+    list-style: none;
+    background-color: lightcyan;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  li.done {
+    background-color: rgb(66, 149, 87);
+    text-decoration-line: line-through;
+  }
+  
+  li i,
+  li p {
+    cursor: pointer;
+  }
+  
+  .btn {
+    width: 88px;
+  }
+  
+  .row {
+    background-color: rgb(207, 236, 179);
+  }
