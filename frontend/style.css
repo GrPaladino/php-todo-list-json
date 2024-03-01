@@ -5,6 +5,7 @@ li {
     background-color: lightcyan;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   
   li.done {
@@ -16,7 +17,7 @@ li {
   li p {
     cursor: pointer;
   }
-  
+ 
   .btn {
     width: 88px;
   }

@@ -1,6 +1,13 @@
 <?php
+
 // dichiaro l'index in una variabile
-$deleted_task = (int) $_POST['index'];
+$updated_task_index = (int) $_POST['index'];
+
+// dichiaro la task modificata
+$updated_task = [
+    "name" => $_POST['text'],
+    "type" => $_POST['type'] === 'true'
+];
 
 // recupero il fil json
 $json_todolist = file_get_contents('../data/todolist.json');
@@ -8,13 +15,8 @@ $json_todolist = file_get_contents('../data/todolist.json');
 // lo trasformo in un array PHP
 $todolist_array = json_decode($json_todolist);
 
-
-// elimino il task dall'array
-unset($todolist_array[$deleted_task]);
-
-// riordino gli indici
-$todolist_array = array_values($todolist_array);
-
+// modifico lo status della task
+$todolist_array[$updated_task_index] = $updated_task;
 
 // ritrasformo l'array in file json
 $json_result = json_encode($todolist_array);

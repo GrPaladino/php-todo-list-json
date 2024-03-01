@@ -42,7 +42,7 @@
 
         <input
           v-model.trim="newTask.name"
-          @keyUp.enter="pushNewTask()"
+          @keyUp.enter="fetchNewTask()"
           class="form-control my-4"
           type="text"
           placeholder="Inserisci il nuovo task..."
@@ -58,16 +58,11 @@
             <h3 class="my-5">Task da completare</h3>
             <ul class="p-0">
               <li v-for="(task, index) in tasks" v-show="!task.type">
-                <p @click="setTypeStatus(task)">{{task.name}}</p>
+                <p @click="fetchUpdateTaskStatus(index, task)" class="m-0">{{task.name}}</p>
                 <span>
                   <i
-                    @click="setTypeStatus(task)"
-                    class="fa-solid fa-check text-success me-3"
-                  ></i>
-
-                  <i
-                    @click="removeTask(index)"
-                    class="fa-solid fa-x text-danger"
+                    @click="fetchUpdateTaskStatus(index, task)"
+                    class="fa-solid fa-check text-success"
                   ></i>
                 </span>
               </li>
@@ -82,10 +77,10 @@
                 v-show="task.type"
                 class="done"
               >
-                <p @click="setTypeStatus(task)">{{task.name}}</p>
+                <p @click="fetchUpdateTaskStatus(index, task)" class="m-0">{{task.name}}</p>
                 <span>
                   <i
-                    @click="setTypeStatus(task)"
+                    @click="fetchUpdateTaskStatus(index, task)"
                     class="fa-solid fa-trash-can-arrow-up text-warning me-3"
                   ></i>
 

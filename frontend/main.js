@@ -44,8 +44,19 @@ const app = createApp({
       this.newTask.name = '';
     },
 
-    removeTask(i) {
-      this.tasks.splice(i, 1);
+    fetchUpdateTaskStatus(index, item) {
+      const newStatus = !item.type;
+
+      const data = { index, text: item.name, type: newStatus, };
+      
+      const params = {
+          headers: { 'Content-type': 'multipart/form-data' },
+      };
+      
+      axios.post('../backend/api/update-task.php', data, params).then((response) => {
+          
+          this.tasks = response.data;
+      });
 
     },
 
