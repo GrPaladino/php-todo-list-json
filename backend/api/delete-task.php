@@ -1,11 +1,6 @@
 <?php
 
-$new_task = [
-    "name" => $_POST['text'],
-    "type" => $_POST['type'] === 'true'
-];
-
-
+$deleted_task = (int) $_POST['index'];
 
 // recupero il fil json
 $json_todolist = file_get_contents('../data/todolist.json');
@@ -13,8 +8,12 @@ $json_todolist = file_get_contents('../data/todolist.json');
 // lo trasformo in un array PHP
 $todolist_array = json_decode($json_todolist);
 
-// push nuovo item nell'array
-$todolist_array[] = $new_task;
+// elimino il task dall'array
+unset($todolist_array[$deleted_task]);
+
+// riordino gli indici
+$todolist_array = array_values($todolist_array);
+
 
 // ritrasformo l'array in file json
 $json_result = json_encode($todolist_array);

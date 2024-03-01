@@ -25,42 +25,44 @@ const app = createApp({
         })
     },
 
+    fetchNewTask() {
+      const item = this.newTask;
+
+      
+      
+      const data = { text: item.name, type: item.type, };
+      
+      const params = {
+          headers: { 'Content-type': 'multipart/form-data' },
+      };
+      
+      axios.post('../backend/api/store-list.php', data, params).then((response) => {
+          
+          this.tasks = response.data;
+      });
+      
+      this.newTask.name = '';
+    },
+
     removeTask(i) {
       this.tasks.splice(i, 1);
 
     },
 
-    pushNewTask() {
-        const item = this.newTask;
-
-        
-        
-        const data = { item: this.newTask.name };
-        
-        const params = {
-            headers: { 'Content-type': 'multipart/form-data' },
-        };
-        
-        axios.post('../backend/api/store-list.php', data, params).then((response) => {
-            
-            this.tasks = response.data;
-        });
-        
-        this.newTask.name = '';
-    },
-
-    deleteTask(i) {
-
-      const data = { index: i };
-
-      const params = {
-            headers: { 'Content-type': 'multipart/form-data' },
-        };
     
-            axios.post('../backend/api/store-list.php', data, params).then((response) => {
-        
-            this.tasks = response.data;
-        });
+
+    fetchDeleteTask(index, item) {
+
+      const data = { index, text: item.name, type: item.type, };
+      
+      const params = {
+          headers: { 'Content-type': 'multipart/form-data' },
+      };
+      
+      axios.post('../backend/api/delete-task.php', data, params).then((response) => {
+          
+          this.tasks = response.data;
+      });
     },
 
 

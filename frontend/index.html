@@ -49,7 +49,7 @@
           aria-label="default input example"
         />
 
-        <button @click="pushNewTask()" class="btn btn-success mb-4 text-start">
+        <button @click="fetchNewTask()" class="btn btn-success mb-4 text-start">
           Inserisci
         </button>
 
@@ -90,7 +90,7 @@
                   ></i>
 
                   <i
-                    @click="deleteTask(index)"
+                    @click="fetchDeleteTask(index, task)"
                     class="fa-solid fa-x text-danger"
                   ></i>
                 </span>
