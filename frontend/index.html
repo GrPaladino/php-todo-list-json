@@ -58,13 +58,24 @@
             <h3 class="my-5">Task da completare</h3>
             <ul class="p-0">
               <li v-for="(task, index) in tasks" v-show="!task.type">
-                <p @click="fetchUpdateTaskStatus(index, task)" class="m-0">{{task.name}}</p>
-                <span>
-                  <i
-                    @click="fetchUpdateTaskStatus(index, task)"
-                    class="fa-solid fa-check text-success"
-                  ></i>
-                </span>
+
+                <div class="task">
+                   <p class="m-0">{{task.name}}</p>
+                   
+                   <span>
+                     <i @click="showEditTask(index)" class="fa-solid fa-pen-fancy me-3"  style="color: #FFD43B;"></i>
+                    <i
+                      @click="fetchUpdateTaskStatus(index, task)"
+                      class="fa-solid fa-check text-success"
+                    ></i>
+                  </span>
+                </div>
+
+                <div v-if="task.showEdit" class="input-group mt-2">
+                  <input @keyUp.enter="fetchTaskName(index, task)" v-model="newName" type="text" class="form-control" placeholder="Rinomina..." aria-label="Rinomina..." aria-describedby="button">
+                  <button @click="fetchTaskName(index, task)" class="btn btn-outline-success" type="button" id="button">Modifica</button>
+                </div>
+                
               </li>
             </ul>
           </div>
@@ -77,18 +88,20 @@
                 v-show="task.type"
                 class="done"
               >
-                <p @click="fetchUpdateTaskStatus(index, task)" class="m-0">{{task.name}}</p>
-                <span>
-                  <i
-                    @click="fetchUpdateTaskStatus(index, task)"
-                    class="fa-solid fa-trash-can-arrow-up text-warning me-3"
-                  ></i>
-
-                  <i
-                    @click="fetchDeleteTask(index, task)"
-                    class="fa-solid fa-x text-danger"
-                  ></i>
-                </span>
+                <div class="task">
+                  <p class="m-0">{{task.name}}</p>
+                  <span>
+                    <i
+                      @click="fetchUpdateTaskStatus(index, task)"
+                      class="fa-solid fa-trash-can-arrow-up text-warning me-3"
+                    ></i>
+  
+                    <i
+                      @click="fetchDeleteTask(index, task)"
+                      class="fa-solid fa-x text-danger"
+                    ></i>
+                  </span>
+                </div>
               </li>
             </ul>
           </div>

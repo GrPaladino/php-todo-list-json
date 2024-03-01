@@ -6,7 +6,9 @@ $updated_task_index = (int) $_POST['index'];
 // dichiaro la task modificata
 $updated_task = [
     "name" => $_POST['text'],
-    "type" => $_POST['type'] === 'true'
+    "type" => $_POST['type'] === 'true',
+    "showEdit" => $_POST["showEdit"] === "true"
+
 ];
 
 // recupero il fil json

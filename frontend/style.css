@@ -3,9 +3,14 @@ li {
     margin-top: 1rem;
     list-style: none;
     background-color: lightcyan;
+  }
+  
+  .task {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
   }
   
   li.done {
@@ -13,8 +18,7 @@ li {
     text-decoration-line: line-through;
   }
   
-  li i,
-  li p {
+  li i{
     cursor: pointer;
   }
  

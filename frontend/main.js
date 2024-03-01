@@ -4,15 +4,17 @@ const app = createApp({
   data() {
     return {
       title: "Todo App",
-
       tasks: [],
+      newName: '',
 
       newTask: {
         name: "",
         type: false,
+        showEdit: false, 
+
       },
 
-    
+      
     };
 
     
@@ -30,7 +32,7 @@ const app = createApp({
 
       
       
-      const data = { text: item.name, type: item.type, };
+      const data = { text: item.name, type: item.type, showEdit: item.showEdit};
       
       const params = {
           headers: { 'Content-type': 'multipart/form-data' },
@@ -47,7 +49,7 @@ const app = createApp({
     fetchUpdateTaskStatus(index, item) {
       const newStatus = !item.type;
 
-      const data = { index, text: item.name, type: newStatus, };
+      const data = { index, text: item.name, type: newStatus, showEdit: item.showEdit };
       
       const params = {
           headers: { 'Content-type': 'multipart/form-data' },
@@ -64,7 +66,7 @@ const app = createApp({
 
     fetchDeleteTask(index, item) {
 
-      const data = { index, text: item.name, type: item.type, };
+      const data = { index, text: item.name, type: item.type, showEdit: item.showEdit };
       
       const params = {
           headers: { 'Content-type': 'multipart/form-data' },
@@ -75,12 +77,27 @@ const app = createApp({
           this.tasks = response.data;
       });
     },
-
-
-
-    setTypeStatus(task) {
-      task.type = !task.type;
+  
+    showEditTask(index) {
+      this.tasks[index].showEdit = !this.tasks[index].showEdit;
     },
+
+    fetchTaskName(index, item) {
+
+      const data = { index, text: this.newName, type: item.type, showEdit: !item.showEdit};
+      
+      const params = {
+          headers: { 'Content-type': 'multipart/form-data' },
+      };
+      
+      axios.post('../backend/api/update-task.php', data, params).then((response) => {
+          this.tasks = response.data;
+      });
+
+      this.newName = '';
+
+
+    }
   },
 
   mounted() {
